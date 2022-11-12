@@ -1,47 +1,21 @@
+import InputHandler from "./InputHandler";
+import Player from "./Player";
+//import Ball from "./Ball";
+
 window.addEventListener('load', () => {
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
 	canvas.width = 500;
 	canvas.height = 500;
 
-	class InputHandler {
-
-	}
-
-	class Player {
-		constructor(game) {
-			this.game = game;
-			this.width = 22;
-			this.height = 22;
-			this.x = 22;
-			this.y = 22;
-			this.speedY = 0;
-		}
-		update() {
-			this.y += this.speedY;
-		}
-		draw(context) {
-			context.fillRect(this.x, this.y, this.width, this.height);
-		}
-	}
-
-	class Ball {
-
-	}
-
-	class Gol {
-
-	}
-	
-	class UI {
-
-	}
-	
 	class Game {
 		constructor(width, height) {
 			this.width = width;
 			this.height = height;
 			this.player = new Player(this);
+			this.input = new InputHandler();
+			this.lastFrameTime = 0;
+			this.deltaTime = 0;
 		}
 		update() {
 			this.player.update();
@@ -53,9 +27,11 @@ window.addEventListener('load', () => {
 
 	const game = new Game(canvas.width, canvas.height);
 
-	function animate() {
+	function animate(time = 0) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 
+		game.deltaTime = (time - game.lastFrameTime) / 1000;
+		game.lastFrameTime = time;
 		game.update();
 		game.draw(ctx);
 

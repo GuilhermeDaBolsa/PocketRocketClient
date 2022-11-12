@@ -20,6 +20,7 @@ export default {
 	mounted() {
 		const externalScript = document.createElement('script')
     	externalScript.setAttribute('src', 'src/scripts/handleCanva.js')
+    	externalScript.setAttribute('type', 'module')
     	document.head.appendChild(externalScript)
 	}
 }
