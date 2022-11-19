@@ -6,10 +6,13 @@
 
 <script>
 
+import { io } from "socket.io-client";
+
 export default {
     props: {},
     data(){
         return {
+			socket: null,
         }
     },
     directives: {},
@@ -22,6 +25,14 @@ export default {
     	externalScript.setAttribute('src', 'src/scripts/handleCanva.js')
     	externalScript.setAttribute('type', 'module')
     	document.head.appendChild(externalScript)
+		//this.socket = io("ws://0.0.0.0:8080/ws");
+		this.sock = new WebSocket("ws://0.0.0.0:8080/ws");
+
+		this.sock.onopen = ()=>{
+			console.log('open');
+			this.sock.send("MENSAGEM BEEEEEEM ESTRANHA");	
+		}
+		
 	}
 }
 </script>
