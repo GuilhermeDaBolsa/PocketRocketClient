@@ -12,6 +12,7 @@ window.addEventListener('load', () => {
 		constructor(width, height) {
 			this.width = width;
 			this.height = height;
+			this.socket = new WebSocket("ws://0.0.0.0:8080/ws");
 			this.player = new Player(this);
 			this.input = new InputHandler();
 			this.lastFrameTime = 0;
@@ -26,6 +27,13 @@ window.addEventListener('load', () => {
 	}
 
 	const game = new Game(canvas.width, canvas.height);
+
+	game.socket.onopen = () => {
+		console.log("bomdia");
+	}
+	game.socket.onclose = () => {
+		console.log("boa noite");
+	}
 
 	function animate(time = 0) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
