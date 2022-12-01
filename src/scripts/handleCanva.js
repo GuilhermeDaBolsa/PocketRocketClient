@@ -29,10 +29,16 @@ window.addEventListener('load', () => {
 	const game = new Game(canvas.width, canvas.height);
 
 	game.socket.onopen = () => {
-		console.log("bomdia");
+		console.log("bomdia");	
 	}
 	game.socket.onclose = () => {
 		console.log("boa noite");
+	}
+	game.socket.onmessage = (message) => {
+		let [dx, dy] = message.data.split(",");
+		game.player.x = parseFloat(dx); 
+		game.player.y = parseFloat(dy); 
+		console.log(dx,dy);
 	}
 
 	function animate(time = 0) {
