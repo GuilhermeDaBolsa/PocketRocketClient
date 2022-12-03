@@ -1,9 +1,11 @@
 <template>
-	<div>
+	<div style="height: 100vh;">
+		<OptionsMenu />
 	</div>
 </template>
 
 <script>
+import OptionsMenu from '../components/OptionsMenu.vue'
 
 export default {
     props: {},
@@ -12,7 +14,7 @@ export default {
         }
     },
     directives: {},
-    components: { },
+    components: { OptionsMenu },
     computed: {},
     watch: {},
     methods: {}

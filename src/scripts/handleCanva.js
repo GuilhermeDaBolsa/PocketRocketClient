@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
 		constructor(width, height) {
 			this.width = width;
 			this.height = height;
-			this.socket = new WebSocket("ws://0.0.0.0:8080/ws");
+			this.socket = new WebSocket("ws://localhost:8080/ws?userId=1");
 			this.player = new Player(this);
 			this.input = new InputHandler();
 			this.lastFrameTime = 0;
