@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		{{name}} - {{usersCount}} / {{maxUsers}}
+		{{name}} - {{usersCount}} / {{maxUsers}} <button @click="$emit('join-room')">join</button>
 	</div>
 </template>
 

@@ -10,7 +10,7 @@ export default {
 	props: {
 		primaryColor: {
 			type: String,
-			default: "#eee"
+			default: "#fff"
 		},
 		secondaryColor: {
 			type: String,
@@ -31,14 +31,15 @@ export default {
 
 <style scoped>
 .container {
-	width: fit-content;
+	width: 100%;
 	background-color: v-bind(primaryColor);
 	color: v-bind(secondaryColor);
 	padding: 8px 12px;
 	border-radius: 12px;
 	text-align: center;
-	border: 1px solid v-bind(secondaryColor);;
+	border: 1px solid v-bind(secondaryColor);
 	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .noselect {

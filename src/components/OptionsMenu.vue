@@ -1,6 +1,6 @@
 <template>
-	<div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-		<div style="padding: 20px; width: 140px;">
+	<div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
+		<div style="padding: 20px; width: 160px;">
 			<Button class="buttonInMenu">CREATE ROOM</Button>
 			<Button class="buttonInMenu" @click="navigate('rooms')">FIND ROOM</Button>
 			<Button class="buttonInMenu">?</Button>

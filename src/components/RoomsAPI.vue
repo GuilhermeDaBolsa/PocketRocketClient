@@ -1,6 +1,6 @@
 <template>
-	<div style="height: 100vh;">
-		<APIRequestHandler :loading="loading" :errorMessage="errorMessage" :results="rooms">
+	<div style="height: 100%;">
+		<APIRequestHandler :loading="loadingRooms" :errorMessage="loadRoomsErrorMessage" :results="rooms">
 			<template v-slot:results>
 
 				<RoomItem
@@ -9,6 +9,7 @@
 					:name="room.name"
 					:usersCount="room.usersCount"
 					:maxUsers="room.maxUsers"
+					@join-room="joinRoom(room.id)"
 				/>
 
 			</template>
@@ -19,13 +20,14 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import RoomItem from './RoomItem.vue';
+import { getAllRooms } from '../scripts/APIs'
 
 export default {
     props: {},
     data(){
         return {
-			loading: false,
-			errorMessage: "",
+			loadingRooms: false,
+			loadRoomsErrorMessage: "",
 			rooms: null,
         }
     },
@@ -35,18 +37,20 @@ export default {
     watch: {},
     methods: {
 		async loadRooms() {
-			this.loading = true;
-			this.errorMessage = ""
+			this.loadingRooms = true;
+			this.loadRoomsErrorMessage = ""
 
-			try{
-				const rawResponse = await fetch('http://127.0.0.1:8080/get_rooms');
-				this.rooms = (await rawResponse.json()).rooms;
-			} catch (error) {
-				console.log(error);
-				this.errorMessage = error.msg ?? "IDK"
-			}
+			const response = await getAllRooms();
 
-			this.loading = false;
+			if(response.isError)
+				this.loadRoomsErrorMessage = response.errorMessage;
+			else
+				this.rooms = response.rooms;
+
+			this.loadingRooms = false;
+		},
+		async joinRoom(roomId) {
+
 		}
 	},
 	created() {
