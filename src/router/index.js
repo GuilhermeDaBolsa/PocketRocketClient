@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import GameView from '../views/Game.vue'
+import GameView from '../views/GameRoom.vue'
 import HomeView from '../views/Home.vue'
-import FindRoomsAPI from '../components/FindRoomsAPI.vue'
-import CreateRoomAPI from '../components/CreateRoomAPI.vue'
+import FindRoomsAPI from '../views/FindRoomsAPI.vue'
+import CreateRoomAPI from '../views/CreateRoomAPI.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,8 +23,8 @@ const router = createRouter({
 			component: CreateRoomAPI
 		},
 		{
-			path: '/game',
-			name: 'game',
+			path: '/gameRoom',
+			name: 'gameRoom',
 			component: GameView
 		},
 	]

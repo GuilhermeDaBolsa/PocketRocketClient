@@ -1,23 +1,34 @@
 <template>
-	<div>
-		<canvas id="canvas"></canvas>
+	<div style="height: 100vh;">
+		<TopBar showBackBtn title="Create Room"/>
+
+		<div style="position: relative; height: 400px;">
+			<canvas id="canvas"></canvas>
+		</div>
+
+		USER 1    -    USER 2
 	</div>
 </template>
 
 <script>
+import APIRequestHandler from '../components/APIRequestHandler.vue'
+import TopBar from '../components/TopBar.vue'
 
 export default {
     props: {},
     data(){
         return {
-			socket: null,
+			loadingCreateRoom: false,
+			createRoomErrorMessage: "",
+			createdRoom: null,
         }
     },
     directives: {},
-    components: { },
+    components: { TopBar, APIRequestHandler },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+	},
 	mounted() {
 		const externalScript = document.createElement('script')
     	externalScript.setAttribute('src', 'src/scripts/handleCanva.js')

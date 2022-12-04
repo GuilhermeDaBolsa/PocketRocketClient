@@ -4,6 +4,7 @@ import router from './router'
 import Vuex from "vuex";
 
 import user from "./store/user"
+import room from "./store/room"
 
 const app = createApp(App)
 
@@ -14,6 +15,7 @@ app.use(new Vuex.Store({
 	actions: {},
 	modules: {
 		user,
+		room,
 	},
 }))
 

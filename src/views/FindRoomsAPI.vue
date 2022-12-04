@@ -25,8 +25,8 @@
 
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
-import RoomItem from './RoomItem.vue';
-import TopBar from './TopBar.vue'
+import RoomItem from '../components/RoomItem.vue';
+import TopBar from '../components/TopBar.vue'
 import { getAllRooms } from '../scripts/APIs'
 
 export default {

@@ -29,6 +29,7 @@ export default {
 	actions: {
 		async createUserAccount(store) {
 			store.state.loadingUser = true;
+			store.state.errorMessageUser = "";
 
 			const response = await createUser();
 
