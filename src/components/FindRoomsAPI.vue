@@ -1,6 +1,12 @@
 <template>
-	<div style="height: 100%;">
-		<APIRequestHandler :loading="loadingRooms" :errorMessage="loadRoomsErrorMessage" :results="rooms">
+	<div style="height: 100vh;">
+		<TopBar showBackBtn title="Find Rooms"/>
+
+		<APIRequestHandler :loading="loadingRooms" :errorMessage="loadRoomsErrorMessage" :results="rooms" style="height: 100%;">
+			<template v-slot:empty>
+				Não há salas criadas :(
+			</template>
+			
 			<template v-slot:results>
 
 				<RoomItem
@@ -20,6 +26,7 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import RoomItem from './RoomItem.vue';
+import TopBar from './TopBar.vue'
 import { getAllRooms } from '../scripts/APIs'
 
 export default {
@@ -32,7 +39,7 @@ export default {
         }
     },
     directives: {},
-    components: { APIRequestHandler, RoomItem },
+    components: { TopBar, APIRequestHandler, RoomItem },
     computed: {},
     watch: {},
     methods: {

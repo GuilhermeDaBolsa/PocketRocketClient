@@ -1,27 +1,21 @@
 <template>
-	<div style="display: flex; flex-flow: column; height: 100vh;">
-		<TopBar style="flex: 0 1 auto;"/>
-
-		<div style="flex: 1">
-			<RouterView />
-		</div>
-	</div>
+	<RouterView />
 </template>
 
 <script>
-import TopBar from './components/TopBar.vue'
-
 export default {
     props: {},
     data(){
-        return {
-        }
+        return {}
     },
     directives: {},
-    components: { TopBar },
+    components: {},
     computed: {},
     watch: {},
-    methods: {}
+    methods: {},
+	created() {
+		this.$store.dispatch('user/loadUserFromLocalStorage');
+	}
 }
 </script>
 

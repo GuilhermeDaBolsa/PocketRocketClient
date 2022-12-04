@@ -1,11 +1,16 @@
 <template>
-	<div class="container" style="height: 60px; border-bottom: 1px solid #333;">
-		Barrinha no topo :)
-		<div style="flex: 1"></div>
+	<div class="centerContainer topBarContainer">
+		
+		<div class="centerContainer topBarButton" @click="back">
+			{{showBackBtn ? '⬅️' : ''}}
+		</div>
+		
 
-		<div class="container avatarButtonContainer" @click="toggleUserMenu">
-			<div class="container avatarButton">
-				<span class="noselect" style="font-size: 22px;">
+		<div class="centerContainer" style="flex: 1">{{title}}</div>
+
+		<div class="centerContainer topBarButton" style="border-left: 1px solid #333;" @click="toggleUserMenu">
+			<div class="centerContainer avatar">
+				<span class="noselect">
 					{{isLogged ? '😀' : '😡'}}
 				</span>
 
@@ -15,7 +20,7 @@
 						{{isLogged ? 'logged ❤️' : 'not logged 💢❗️'}}
 					</div>
 
-					<APIRequestHandler :loading="loadingUser" :errorMessage="errorMessageUser"></APIRequestHandler>
+					<APIRequestHandler :loading="userState.loadingUser" :errorMessage="userState.errorMessageUser"></APIRequestHandler>
 
 					<div v-show="!isLogged">
 						<button @click="createUserAccount">Create Account</button>
@@ -29,82 +34,73 @@
 
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
-import { createUser } from '../scripts/APIs'
 
 export default {
-    props: {},
+    props: {
+		title: 			{ type: String, default: "titulo :)" },
+		showBackBtn: 	{ type: Boolean, default: false },
+	},
     data(){
         return {
 			showUserMenu: false,
-
-			loadingUser: false,
-			errorMessageUser: "",
-			user: null
         }
     },
     directives: {},
     components: { APIRequestHandler },
     computed: {
+		userState: {
+			get() {
+				return this.$store.state.user;
+			}
+		},
 		isLogged() {
-			return this.user && this.user.id
-		}
+			return this.userState.userData && this.userState.userData.id
+		},
 	},
     watch: {},
     methods: {
+		back() {
+			this.$router.go(-1);
+		},
 		toggleUserMenu() {
 			this.showUserMenu = !this.showUserMenu;
 		},
-		getUserFromStorage() {
-			const user = localStorage.getItem('user');
-
-			if(!user)
-				return null;
-			
-			const parsedUser = JSON.parse(user);
-
-			if(!parsedUser || !parsedUser.id)
-				return null;
-			
-			return parsedUser;
-		},
-		async createUserAccount() {
-			this.loadingUser = true;
-
-			const response = await createUser();
-
-			if(response.isError)
-				this.errorMessageUser = response.errorMessage;
-			else {
-				this.user = response;
-				localStorage.setItem('user', JSON.stringify(response));
-			}
-
-			this.loadingUser = false;
+		createUserAccount() {
+			this.$store.dispatch("user/createUserAccount");
 		}
-	},
-	created() {
-		this.user = this.getUserFromStorage();
 	}
 }
 </script>
 
 <style scoped>
-.container {
+.centerContainer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.avatarButtonContainer {
+
+.topBarContainer {
+	height: 60px;
+	border-bottom: 1px solid #333;
+	font-size: 22px;
+}
+
+.topBarButton {
+	width: 60px;
+	height: 60px;
+	padding: 6px;
 	cursor: pointer;
-	padding: 8px;
-	border-left: 1px solid #333;
+	box-sizing: border-box;
 }
-.avatarButton {
-	width: 40px;
-	height: 40px;
+
+.avatar {
+	width: 100%;
+	height: 100%;
 	border: 1px solid #333;
-	border-radius: 20px;
+	border-radius: 50%;
+	box-sizing: border-box;
 }
+
 .floatingMenu {
 	position: absolute;
 	background-color: #fff;
