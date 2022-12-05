@@ -2,7 +2,7 @@
 	<div style="height: 100vh;">
 		<TopBar showBackBtn title="Create Room"/>
 
-		<div style="position: relative; height: 400px;">
+		<div style="position: relative; height: 500px;">
 			<canvas id="canvas"></canvas>
 		</div>
 
@@ -17,11 +17,7 @@ import TopBar from '../components/TopBar.vue'
 export default {
     props: {},
     data(){
-        return {
-			loadingCreateRoom: false,
-			createRoomErrorMessage: "",
-			createdRoom: null,
-        }
+        return {}
     },
     directives: {},
     components: { TopBar, APIRequestHandler },
@@ -29,7 +25,7 @@ export default {
     watch: {},
     methods: {
 	},
-	mounted() {
+	created() {
 		const externalScript = document.createElement('script')
     	externalScript.setAttribute('src', 'src/scripts/handleCanva.js')
     	externalScript.setAttribute('type', 'module')
@@ -42,6 +38,8 @@ export default {
 #canvas {
 	border: 5px solid black;
 	position: absolute;
+	width: 800px;
+	height: 440px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);

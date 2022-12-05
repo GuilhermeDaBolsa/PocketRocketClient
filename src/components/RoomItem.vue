@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		{{name}} - {{usersCount}} / {{maxUsers}} <button @click="$emit('join-room')">join</button>
+		{{id}} - {{name}} - {{usersCount}} / {{maxUsers}} <button @click="$emit('join-room', id)">join</button>
 	</div>
 </template>
 
@@ -8,6 +8,7 @@
 
 export default {
     props: {
+		id: 		{ type: [Number, String], 	default: '?' },
 		name: 		{ type: String, 			default: "unknown" },
 		usersCount: { type: [Number, String], 	default: '?' },
 		maxUsers: 	{ type: [Number, String], 	default: '?' },

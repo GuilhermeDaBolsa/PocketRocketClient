@@ -12,10 +12,11 @@
 				<RoomItem
 					v-for="room in rooms"
 					:key="room.id"
+					:id="room.id"
 					:name="room.name"
 					:usersCount="room.usersCount"
 					:maxUsers="room.maxUsers"
-					@join-room="joinRoom(room.id)"
+					@join-room="joinRoom"
 				/>
 
 			</template>

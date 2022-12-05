@@ -5,8 +5,8 @@ import Player from "./Player";
 window.addEventListener('load', () => {
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
-	canvas.width = 500;
-	canvas.height = 500;
+	canvas.width = 800;
+	canvas.height = 440;
 
 	class Game {
 		constructor(width, height) {
