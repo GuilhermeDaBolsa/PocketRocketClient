@@ -13,6 +13,7 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
+import { start } from "../scripts/handleCanva"
 
 export default {
     props: {},
@@ -25,11 +26,8 @@ export default {
     watch: {},
     methods: {
 	},
-	created() {
-		const externalScript = document.createElement('script')
-    	externalScript.setAttribute('src', 'src/scripts/handleCanva.js')
-    	externalScript.setAttribute('type', 'module')
-    	document.head.appendChild(externalScript)
+	mounted() {
+		start();
 	}
 }
 </script>

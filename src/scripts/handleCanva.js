@@ -2,7 +2,7 @@ import InputHandler from "./InputHandler";
 import Player from "./Player";
 //import Ball from "./Ball";
 
-window.addEventListener('load', () => {
+function start() {
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
 	canvas.width = 800;
@@ -53,4 +53,6 @@ window.addEventListener('load', () => {
 	}
 
 	animate();
-})
+}
+
+export { start }
