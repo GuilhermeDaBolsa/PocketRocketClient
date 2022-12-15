@@ -2,6 +2,8 @@ import InputHandler from "./InputHandler";
 import Player from "./Player";
 //import Ball from "./Ball";
 
+let requestAnimationId = -1;
+
 function start() {
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
@@ -49,10 +51,14 @@ function start() {
 		game.update();
 		game.draw(ctx);
 
-		requestAnimationFrame(animate);
+		requestAnimationId = requestAnimationFrame(animate);
 	}
 
 	animate();
 }
 
-export { start }
+function stop() {
+	window.cancelAnimationFrame(requestAnimationId);
+}
+
+export { start, stop }

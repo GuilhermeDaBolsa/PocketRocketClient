@@ -13,7 +13,7 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
-import { start } from "../scripts/handleCanva"
+import { start, stop } from "../scripts/handleCanva"
 
 export default {
     props: {},
@@ -28,6 +28,9 @@ export default {
 	},
 	mounted() {
 		start();
+	},
+	beforeUnmount() {
+		stop();
 	}
 }
 </script>
