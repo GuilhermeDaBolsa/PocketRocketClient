@@ -2,11 +2,12 @@
 	<div style="height: 100vh;">
 		<TopBar showBackBtn title="Create Room"/>
 
-		<div style="width: 200px; height: 200px;">
-			Nome:
-			<input type="text" value="Salinha" disabled />
-			<button @click="createNewRoom" :disabled="roomState.loadingRoom">Create</button>
-
+		<div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
+			<div style="padding: 20px; width: 160px;">
+				Nome:
+				<input style="width: 100%; margin-bottom: 5px;" type="text" value="Salinha" disabled />
+				<Button @click="createNewRoom" class="buttonInMenu">CREATE</Button>
+			</div>
 		</div>
 
 		<APIRequestHandler :loading="roomState.loadingRoom" :errorMessage="roomState.errorMessageRoom" :results="roomState.roomData">
@@ -21,6 +22,7 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
+import Button from '../components/Button.vue'
 
 export default {
     props: {},
@@ -29,7 +31,7 @@ export default {
         }
     },
     directives: {},
-    components: { TopBar, APIRequestHandler },
+    components: { TopBar, APIRequestHandler, Button},
     computed: {
 		user: {
 			get() {
