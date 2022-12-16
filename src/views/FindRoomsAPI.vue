@@ -41,7 +41,18 @@ export default {
     },
     directives: {},
     components: { TopBar, APIRequestHandler, RoomItem },
-    computed: {},
+    computed: {
+		user: {
+			get() {
+				return this.$store.getters["user/userData"];
+			}
+		},
+		roomState: {
+			get() {
+				return this.$store.state.room;
+			}
+		},
+	},
     watch: {},
     methods: {
 		async loadRooms() {
@@ -58,7 +69,12 @@ export default {
 			this.loadingRooms = false;
 		},
 		async joinRoom(roomId) {
-
+			await this.$store.dispatch("room/joinRoom", {userId: this.user?.id, roomId: roomId});
+			if(!this.roomState.errorMessageRoom && this.roomState.roomData) {
+				setTimeout(() => {
+					this.$router.push({ name: "gameRoom" });
+				}, 1000)
+			}
 		}
 	},
 	created() {
