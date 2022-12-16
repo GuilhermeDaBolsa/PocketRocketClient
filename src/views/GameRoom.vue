@@ -13,24 +13,40 @@
 <script>
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
-import { start, stop } from "../scripts/handleCanva"
+import Game2D from "../scripts/handleCanva"
 
 export default {
     props: {},
     data(){
-        return {}
+        return {
+			game: null,
+		}
     },
     directives: {},
     components: { TopBar, APIRequestHandler },
-    computed: {},
+    computed: {
+		user: {
+			get() {
+				return this.$store.getters["user/userData"];
+			}
+		},
+		roomState: {
+			get() {
+				return this.$store.state.room;
+			}
+		},
+	},
     watch: {},
     methods: {
 	},
 	mounted() {
-		start();
+		const canva = document.getElementById('canvas');
+		this.game = new Game2D(canva, 800, 440);
+		this.game.openConnection("ws://localhost:8080/" + this.roomState.roomData.connectionRoute, this.user.id);
+		this.game.start();
 	},
 	beforeUnmount() {
-		stop();
+		this.game.stop();
 	}
 }
 </script>

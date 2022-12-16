@@ -2,63 +2,64 @@ import InputHandler from "./InputHandler";
 import Player from "./Player";
 //import Ball from "./Ball";
 
-let requestAnimationId = -1;
+class Game2D {
+	constructor(canvaElementInDOM, canvaWidth, canvaHeight) {
+		this.canvas = canvaElementInDOM; 
+		this.ctx = this.canvas.getContext('2d');
+		this.canvas.width = canvaWidth;
+		this.canvas.height = canvaHeight;
 
-function start() {
-	const canvas = document.getElementById('canvas');
-	const ctx = canvas.getContext('2d');
-	canvas.width = 800;
-	canvas.height = 440;
+		
+		this.player = new Player(this);
+		this.input = new InputHandler();
+		this.lastFrameTime = 0;
+		this.deltaTime = 0;
+		this.requestedFrameId = -1;
+	}
 
-	class Game {
-		constructor(width, height) {
-			this.width = width;
-			this.height = height;
-			this.socket = new WebSocket("ws://localhost:8080/ws?userId=1");
-			this.player = new Player(this);
-			this.input = new InputHandler();
-			this.lastFrameTime = 0;
-			this.deltaTime = 0;
+	openConnection(serverConnection, userId) {
+		this.socket = new WebSocket(serverConnection + "?userId=" + userId);
+
+		this.socket.onopen = () => {
+			console.log("bomdia");	
 		}
-		update() {
-			this.player.update();
+		this.socket.onclose = () => {
+			console.log("boa noite");
 		}
-		draw(context) {
-			this.player.draw(context);
+		this.socket.onmessage = (message) => {
+			const [dx, dy] = message.data.split(",");
+			this.player.x = parseFloat(dx); 
+			this.player.y = parseFloat(dy); 
+			console.log(dx,dy);
 		}
 	}
 
-	const game = new Game(canvas.width, canvas.height);
-
-	game.socket.onopen = () => {
-		console.log("bomdia");	
-	}
-	game.socket.onclose = () => {
-		console.log("boa noite");
-	}
-	game.socket.onmessage = (message) => {
-		let [dx, dy] = message.data.split(",");
-		game.player.x = parseFloat(dx); 
-		game.player.y = parseFloat(dy); 
-		console.log(dx,dy);
+	update() {
+		this.player.update();
 	}
 
-	function animate(time = 0) {
-		ctx.clearRect(0,0,canvas.width,canvas.height);
-
-		game.deltaTime = (time - game.lastFrameTime) / 1000;
-		game.lastFrameTime = time;
-		game.update();
-		game.draw(ctx);
-
-		requestAnimationId = requestAnimationFrame(animate);
+	draw(context) {
+		this.player.draw(context);
 	}
 
-	animate();
+	start() {
+		this.animate();
+	}
+
+	stop() {
+		cancelAnimationFrame(this.requestAnimationId);
+	}
+
+	animate(time = 0) {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		this.deltaTime = (time - this.lastFrameTime) / 1000;
+		this.lastFrameTime = time;
+		this.update();
+		this.draw(this.ctx);
+
+		this.requestAnimationId = requestAnimationFrame((t) => this.animate(t));
+	}
 }
 
-function stop() {
-	window.cancelAnimationFrame(requestAnimationId);
-}
-
-export { start, stop }
+export default Game2D;
