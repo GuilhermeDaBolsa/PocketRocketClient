@@ -57,9 +57,9 @@ class Player extends Body {
 		if(this.tick >= 30) {
 			console.log("end tick");
 			this.tick = 0;
-			try {
+			/*try {
 				this.game.socket.send(`${this.x},${this.y}`);
-			}catch{}
+			}catch{}*/
 		}
 
 		super.update();

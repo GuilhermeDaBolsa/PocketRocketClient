@@ -29,8 +29,8 @@ class Game2D {
 		this.socket.onmessage = (message) => {
 			const [dx, dy] = message.data.split(",");
 			this.player.x = parseFloat(dx); 
-			this.player.y = parseFloat(dy); 
-			console.log(dx,dy);
+			this.player.y = parseFloat(dy);
+			//console.log(dx,dy);
 		}
 	}
 
