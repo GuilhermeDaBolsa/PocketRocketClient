@@ -3,11 +3,15 @@ async function createUser() {
 }
 
 async function createRoom(userId) {
-	return await fetchAPI('create_room', 'POST', JSON.stringify({userId}));
+	return await fetchAPI('create_room', 'POST', JSON.stringify({ userId }));
 }
 
 async function joinRoom(userId, roomId) {
-	return await fetchAPI('join_room', 'POST', JSON.stringify({userId, roomId}));
+	return await fetchAPI('join_room', 'POST', JSON.stringify({ userId, roomId }));
+}
+
+async function exitRoom(userId) {
+	return await fetchAPI('exit_room', 'POST', JSON.stringify({ userId }));
 }
 
 async function getAllRooms() {
@@ -32,4 +36,4 @@ function handleAPIError(error) {
 	return { isError: true, errorMessage: error?.message ?? "Something went wrong!" }
 }
 
-export { createUser, createRoom, getAllRooms, joinRoom };
+export { createUser, createRoom, getAllRooms, joinRoom, exitRoom };

@@ -14,6 +14,8 @@
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
 import Game2D from "../scripts/handleCanva"
+import { exitRoom } from '../scripts/APIs'
+
 
 export default {
     props: {},
@@ -46,7 +48,9 @@ export default {
 		this.game.start();
 	},
 	beforeUnmount() {
-		this.game.stop();
+		exitRoom(this.user.id)
+		.then(r => { this.game.stop(); }) //TODO IF SUCCESS, ERASE ROOM INFO IN ROOM STORE
+		.catch(e => console.log("F"));
 	}
 }
 </script>
