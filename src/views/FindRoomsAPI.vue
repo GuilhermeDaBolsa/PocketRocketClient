@@ -19,8 +19,15 @@
 					@join-room="joinRoom"
 				/>
 
+				<APIRequestHandler
+					:loading="roomState.loadingRoom"
+					:errorMessage="roomState.errorMessageRoom"
+					:results="roomState.roomData"
+				/>
+
 			</template>
 		</APIRequestHandler>
+
 	</div>
 </template>
 
@@ -60,7 +67,7 @@ export default {
 			this.loadRoomsErrorMessage = ""
 
 			const response = await getAllRooms();
-
+			
 			if(response.isError)
 				this.loadRoomsErrorMessage = response.errorMessage;
 			else

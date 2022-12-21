@@ -3,7 +3,7 @@
 
 		<!-- loading state -->
 		<slot name="loading" v-if="loading">
-			<Loading color="red"/>
+			<Loading />
 		</slot>
 
 		<!-- error state -->

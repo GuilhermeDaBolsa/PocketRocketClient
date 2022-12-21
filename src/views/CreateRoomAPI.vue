@@ -5,7 +5,7 @@
 		<div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
 			<div style="padding: 20px; width: 160px;">
 				Nome:
-				<input style="width: 100%; margin-bottom: 5px;" type="text" value="Salinha" disabled />
+				<input style="width: 100%; margin-bottom: 5px; box-sizing: border-box;" type="text" value="Salinha" disabled />
 				<Button @click="createNewRoom" class="buttonInMenu">CREATE</Button>
 			</div>
 
