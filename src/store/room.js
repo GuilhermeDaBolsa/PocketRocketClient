@@ -1,4 +1,5 @@
-import { createRoom, joinRoom } from '../scripts/APIs'
+import { createRoom, joinRoom, exitRoom } from '../scripts/APIs'
+import router from '../router'
 
 export default {
 	namespaced: true,
@@ -6,6 +7,11 @@ export default {
 		loadingRoom: false,
 		errorMessageRoom: "",
 		roomData: null,
+
+		loadingExitRoom: false,
+		errorMessageExitRoom: "",
+
+		game: null,
 	},
 	getters: {
 		roomData(state) {
@@ -22,8 +28,10 @@ export default {
 
 			if(response.isError)
 				store.state.errorMessageRoom = response.errorMessage;
-			else 
+			else {
 				store.state.roomData = response;
+				router.push({ name: "gameRoom" });
+			}
 			
 			store.state.loadingRoom = false;
 		},
@@ -35,10 +43,27 @@ export default {
 
 			if(response.isError)
 				store.state.errorMessageRoom = response.errorMessage;
-			else 
+			else {
 				store.state.roomData = response;
+				router.push({ name: "gameRoom" });
+			}
 			
 			store.state.loadingRoom = false;
+		},
+		async exitRoom(store, userId) {
+			store.state.loadingExitRoom = true;
+			store.state.errorMessageExitRoom = "";
+
+			const response = await exitRoom(userId) ?? {} //TODO BAD '??', SHOULD CHANGE IN API.js
+
+			if(response.isError)
+				store.state.errorMessageExitRoom = response.errorMessage;
+			else {
+				store.state.game.stop();
+				store.state.roomData = null;
+			}
+			
+			store.state.loadingExitRoom = false;
 		}
 	},
 	modules: {},

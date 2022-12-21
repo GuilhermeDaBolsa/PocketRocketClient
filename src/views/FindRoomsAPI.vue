@@ -69,12 +69,7 @@ export default {
 			this.loadingRooms = false;
 		},
 		async joinRoom(roomId) {
-			await this.$store.dispatch("room/joinRoom", {userId: this.user?.id, roomId: roomId});
-			if(!this.roomState.errorMessageRoom && this.roomState.roomData) {
-				setTimeout(() => {
-					this.$router.push({ name: "gameRoom" });
-				}, 1000)
-			}
+			await this.$store.dispatch("room/joinRoom", {userId: this.user?.id ?? null, roomId: roomId}); //TODO rethink this 'this.user?.id ?? null'
 		}
 	},
 	created() {

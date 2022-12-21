@@ -8,14 +8,14 @@
 				<input style="width: 100%; margin-bottom: 5px;" type="text" value="Salinha" disabled />
 				<Button @click="createNewRoom" class="buttonInMenu">CREATE</Button>
 			</div>
+
+			<APIRequestHandler :loading="roomState.loadingRoom" :errorMessage="roomState.errorMessageRoom" :results="roomState.roomData">
+				<template v-slot:results>
+					Entrando na sala...
+				</template>
+			</APIRequestHandler>
 		</div>
 
-		<APIRequestHandler :loading="roomState.loadingRoom" :errorMessage="roomState.errorMessageRoom" :results="roomState.roomData">
-			<template v-slot:results>
-				Entrando na sala...
-			</template>
-
-		</APIRequestHandler>
 	</div>
 </template>
 
@@ -47,12 +47,7 @@ export default {
     watch: {},
     methods: {
 		async createNewRoom() {
-			await this.$store.dispatch("room/createRoom", this.user?.id ?? 0);
-			if(!this.roomState.errorMessageRoom && this.roomState.roomData) {
-				setTimeout(() => {
-					this.$router.push({ name: "gameRoom" });
-				}, 1000)
-			}
+			await this.$store.dispatch("room/createRoom", this.user?.id ?? null); //TODO rethink this 'this.user?.id ?? null'
 		}
 	}
 }

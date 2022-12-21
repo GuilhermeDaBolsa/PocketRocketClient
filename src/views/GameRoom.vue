@@ -14,14 +14,11 @@
 import APIRequestHandler from '../components/APIRequestHandler.vue'
 import TopBar from '../components/TopBar.vue'
 import Game2D from "../scripts/handleCanva"
-import { exitRoom } from '../scripts/APIs'
-
 
 export default {
     props: {},
     data(){
         return {
-			game: null,
 		}
     },
     directives: {},
@@ -37,10 +34,17 @@ export default {
 				return this.$store.state.room;
 			}
 		},
+		game: {
+			get() {
+				return this.roomState.game;
+			},
+			set(v) {
+				this.roomState.game = v;
+			}
+		}
 	},
     watch: {},
-    methods: {
-	},
+    methods: {},
 	mounted() {
 		const canva = document.getElementById('canvas');
 		this.game = new Game2D(canva, 800, 440);
@@ -48,9 +52,7 @@ export default {
 		this.game.start();
 	},
 	beforeUnmount() {
-		exitRoom(this.user.id)
-		.then(r => { this.game.stop(); }) //TODO IF SUCCESS, ERASE ROOM INFO IN ROOM STORE
-		.catch(e => console.log("F"));
+		this.$store.dispatch("room/exitRoom", this.user?.id ?? null); //TODO rethink this 'this.user?.id ?? null'
 	}
 }
 </script>

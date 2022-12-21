@@ -1,5 +1,5 @@
 async function createUser() {
-	return await fetchAPI('create_user', 'POST', {});
+	return await fetchAPI('create_user', 'POST', JSON.stringify({}));
 }
 
 async function createRoom(userId) {
