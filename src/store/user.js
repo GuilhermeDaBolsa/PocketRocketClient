@@ -42,6 +42,10 @@ export default {
 
 			store.state.loadingUser = false;
 		},
+		logoutUser(store) {
+			localStorage.setItem('user', null);
+			store.state.userData = null
+		},
 		loadUserFromLocalStorage(store) {
 			store.state.userData = store.getters.getUserFromStorage;
 		}

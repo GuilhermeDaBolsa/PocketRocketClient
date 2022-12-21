@@ -47,7 +47,7 @@ export default {
     watch: {},
     methods: {
 		async createNewRoom() {
-			await this.$store.dispatch("room/createRoom", this.user?.id ?? false);
+			await this.$store.dispatch("room/createRoom", this.user?.id ?? 0);
 			if(!this.roomState.errorMessageRoom && this.roomState.roomData) {
 				setTimeout(() => {
 					this.$router.push({ name: "gameRoom" });

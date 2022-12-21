@@ -22,7 +22,11 @@
 
 					<APIRequestHandler :loading="userState.loadingUser" :errorMessage="userState.errorMessageUser"></APIRequestHandler>
 
-					<div v-show="!isLogged">
+					<div v-if="isLogged">
+						<button @click="logout">Logout</button>
+					</div>
+
+					<div v-else>
 						<button @click="createUserAccount">Create Account</button>
 					</div>
 					
@@ -67,6 +71,9 @@ export default {
 		},
 		createUserAccount() {
 			this.$store.dispatch("user/createUserAccount");
+		},
+		logout() {
+			this.$store.dispatch("user/logoutUser");
 		}
 	}
 }
