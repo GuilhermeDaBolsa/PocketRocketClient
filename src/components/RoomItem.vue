@@ -1,6 +1,9 @@
 <template>
 	<div class="container">
-		{{id}} - {{name}} - {{usersCount}} / {{maxUsers}} <button @click="$emit('join-room', id)">join</button>
+		<div>{{id}} - {{name}}</div>
+		<div style="flex: 1;"></div>
+		<div>{{usersCount}} / {{maxUsers}}</div>
+		<button style="margin-left: 12px;" @click="$emit('join-room', id)">join</button>
 	</div>
 </template>
 
@@ -28,11 +31,13 @@ export default {
 <style scoped>
 .container {
 	display: flex;
-	border: 1px solid black;
+	border: 1px solid #dddddd;
 	border-radius: 6px;
 	padding: 8px;
 	margin: 6px;
 	width: 100%;
+	max-width: 450px;
 	box-sizing: border-box;
+	white-space: nowrap;
 }
 </style>

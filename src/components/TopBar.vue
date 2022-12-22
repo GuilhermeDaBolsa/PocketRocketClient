@@ -16,7 +16,7 @@
 
 				<div v-show="showUserMenu" class="floatingMenu" @click.stop="(1==1)">
 
-					<div style="color: black">
+					<div>
 						{{isLogged ? '❤️logged❗️❤️' : '💢not logged❗️'}}
 					</div>
 
@@ -110,11 +110,11 @@ export default {
 
 .floatingMenu {
 	position: absolute;
-	background-color: #fff;
+	background-color: #232323;
 	top: 60px;
 	right: 0;
 	padding: 8px;
-	border: 1px solid #333;
+	border: 1px solid #dddddd;
 	cursor: auto;
 }
 

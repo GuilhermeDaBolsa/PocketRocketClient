@@ -5,8 +5,13 @@
 		<div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
 			<div style="padding: 20px; width: 160px;">
 				Nome:
-				<input style="width: 100%; margin-bottom: 5px; box-sizing: border-box;" type="text" value="Salinha" disabled />
-				<Button @click="createNewRoom" class="buttonInMenu">CREATE</Button>
+				<input
+					type="text"
+					value="Salinha"
+					disabled
+					style="width: 100%; margin-bottom: 5px; box-sizing: border-box; color: #dddddd"
+				/>
+				<Button @click="createNewRoom">CREATE</Button>
 			</div>
 
 			<APIRequestHandler :loading="roomState.loadingRoom" :errorMessage="roomState.errorMessageRoom" :results="roomState.roomData">

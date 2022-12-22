@@ -10,11 +10,11 @@ export default {
 	props: {
 		primaryColor: {
 			type: String,
-			default: "#fff"
+			default: "#232323"
 		},
 		secondaryColor: {
 			type: String,
-			default: "#444"
+			default: "#eeeeee"
 		},
 	},
     data(){

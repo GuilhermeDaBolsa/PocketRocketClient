@@ -10,7 +10,7 @@ class Game2D {
 		this.canvas.height = canvaHeight;
 
 		
-		this.player = new Player(this, roomId);
+		this.player = new Player(this);
 		this.input = new InputHandler();
 		this.lastFrameTime = 0;
 		this.deltaTime = 0;
@@ -32,6 +32,10 @@ class Game2D {
 			this.player.y = parseFloat(dy);
 			//console.log(dx,dy);
 		}
+	}
+
+	setPlayerId(playerId) {
+		this.player.playerId = playerId;
 	}
 
 	update() {
