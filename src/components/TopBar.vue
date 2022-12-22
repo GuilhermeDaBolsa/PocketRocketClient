@@ -6,9 +6,9 @@
 		</div>
 		
 
-		<div class="centerContainer" style="flex: 1">{{title}}</div>
+		<div class="centerContainer" style="flex: 1"></div>
 
-		<div class="centerContainer topBarButton" style="border-left: 1px solid #333;" @click="toggleUserMenu">
+		<div class="centerContainer topBarButton" style="border-left: 1px solid #fff;" @click="toggleUserMenu">
 			<div class="centerContainer avatar">
 				<span class="noselect">
 					{{isLogged ? '😀' : '😡'}}
@@ -41,7 +41,7 @@ import APIRequestHandler from '../components/APIRequestHandler.vue'
 
 export default {
     props: {
-		title: 			{ type: String, default: "titulo :)" },
+		//title: 			{ type: String, default: "titulo :)" },
 		showBackBtn: 	{ type: Boolean, default: false },
 	},
     data(){
@@ -88,7 +88,7 @@ export default {
 
 .topBarContainer {
 	height: 60px;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #fff;
 	font-size: 22px;
 }
 
@@ -103,7 +103,7 @@ export default {
 .avatar {
 	width: 100%;
 	height: 100%;
-	border: 1px solid #333;
+	border: 1px solid #fff;
 	border-radius: 50%;
 	box-sizing: border-box;
 }
