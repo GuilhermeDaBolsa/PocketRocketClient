@@ -16,8 +16,8 @@
 
 				<div v-show="showUserMenu" class="floatingMenu" @click.stop="(1==1)">
 
-					<div>
-						{{isLogged ? 'logged ❤️' : 'not logged 💢❗️'}}
+					<div style="color: black">
+						{{isLogged ? '❤️logged❗️❤️' : '💢not logged❗️'}}
 					</div>
 
 					<APIRequestHandler :loading="userState.loadingUser" :errorMessage="userState.errorMessageUser"></APIRequestHandler>

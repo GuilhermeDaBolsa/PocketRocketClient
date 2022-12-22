@@ -2,17 +2,21 @@
 	<div style="height: 78vh;">
 		<TopBar />
 		<div style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
-			<div class="row">
-				<div class="col-12">
-					<div class="col-4"></div>
-					<div class="col-4">
-						<h1 class="text-center">RocketPocket</h1></div>
-					<div class="col-4"></div>
-				</div>
-				<div class="col-12">
-					<Button class="buttonInMenu" @click="navigate('createRoom')">CREATE ROOM</Button>
-					<Button class="buttonInMenu" @click="navigate('findRooms')">FIND ROOM</Button>
-					<Button class="buttonInMenu">?</Button>
+			<div class="d-flex">
+				<div class="row">
+					<div class="col-12">
+						<div class="d-flex" style="padding: 10px;">
+							<img src="src/assets/Images/car-piskel-animation-blue.gif"
+								style="width: 80px; height: 50px;">
+							<h1 class="text-center">
+								Pocket Rocket</h1>
+							<img src="src/assets/Images/car-piskel-animation-red.gif"
+								style="width: 80px; height: 50px;">
+						</div>
+						<Button class="buttonInMenu" @click="navigate('createRoom')">CREATE ROOM</Button>
+						<Button class="buttonInMenu" @click="navigate('findRooms')">FIND ROOM</Button>
+						<Button class="buttonInMenu">?</Button>
+					</div>
 				</div>
 			</div>
 		</div>
