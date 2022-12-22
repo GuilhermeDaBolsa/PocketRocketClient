@@ -1,7 +1,7 @@
 import Body from "./Body";
 
 class Player extends Body {
-	constructor(game) {
+	constructor(game, userId) {
 		super(0, 0, 1);
 
 		this.width = 30;
@@ -11,7 +11,7 @@ class Player extends Body {
 
 		this.walkSpeedAcceleration = 8;
 		this.tick = 0;
-		this.playerId = 0;
+		this.id = userId;
 	}
 	update() { //TODO AAAAAAAA EVERY THING HERE IS DUPLICATED, PLS FIX
 		this.tick += 1;
@@ -55,12 +55,22 @@ class Player extends Body {
 			this.speedX += moveXSpeed;
 		}
 
-		if(this.tick >= 30) {
-			console.log("end tick");
+		if(this.tick >= 6) {
 			this.tick = 0;
+
+			const buffer = new ArrayBuffer(4);
+			const view = new DataView(buffer);
+			
+			view.setUint8(0, (this.game.input.keys.has('ArrowUp') 	? 1 : 0));
+			view.setUint8(1, (this.game.input.keys.has('ArrowDown') ? 1 : 0));
+			view.setUint8(2, (this.game.input.keys.has('ArrowLeft') ? 1 : 0));
+			view.setUint8(3, (this.game.input.keys.has('ArrowRight')? 1 : 0));
+
 			try {
-				this.game.socket.send(`${this.playerId},${this.x},${this.y}`);
-			}catch{}
+				this.game.socket.send(buffer);
+			}catch (ex) {
+				console.error(ex);
+			}
 		}
 
 		super.update();

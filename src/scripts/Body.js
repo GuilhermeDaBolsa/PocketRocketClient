@@ -16,8 +16,8 @@ class Body {
 		this.currentSpeedDirectionX = Math.sign(this.speedX);
 		this.currentSpeedDirectionY = Math.sign(this.speedY);
 
-		this.x += this.speedX;
-		this.y += this.speedY;
+		//this.x += this.speedX;
+		//this.y += this.speedY;
 	}
 }
 
