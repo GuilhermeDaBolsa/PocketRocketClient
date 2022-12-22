@@ -47,7 +47,7 @@ export default {
     methods: {},
 	mounted() {
 		const canva = document.getElementById('canvas');
-		this.game = new Game2D(canva, 800, 440);
+		this.game = new Game2D(canva, 800, 440, this.roomState.roomData.id);
 		this.game.openConnection("ws://localhost:8080/" + this.roomState.roomData.connectionRoute, this.user.id);
 		this.game.start();
 	},

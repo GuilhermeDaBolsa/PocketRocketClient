@@ -1,7 +1,7 @@
 import Body from "./Body";
 
 class Player extends Body {
-	constructor(game) {
+	constructor(game, roomId) {
 		super(0, 0, 1);
 
 		this.width = 30;
@@ -11,6 +11,7 @@ class Player extends Body {
 
 		this.walkSpeedAcceleration = 8;
 		this.tick = 0;
+		this.roomId = roomId;
 	}
 	update() { //TODO AAAAAAAA EVERY THING HERE IS DUPLICATED, PLS FIX
 		this.tick += 1;
@@ -57,9 +58,9 @@ class Player extends Body {
 		if(this.tick >= 30) {
 			console.log("end tick");
 			this.tick = 0;
-			/*try {
-				this.game.socket.send(`${this.x},${this.y}`);
-			}catch{}*/
+			try {
+				this.game.socket.send(`${this.roomId},${this.x},${this.y}`);
+			}catch{}
 		}
 
 		super.update();

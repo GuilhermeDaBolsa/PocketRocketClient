@@ -3,14 +3,14 @@ import Player from "./Player";
 //import Ball from "./Ball";
 
 class Game2D {
-	constructor(canvaElementInDOM, canvaWidth, canvaHeight) {
+	constructor(canvaElementInDOM, canvaWidth, canvaHeight, roomId) {
 		this.canvas = canvaElementInDOM; 
 		this.ctx = this.canvas.getContext('2d');
 		this.canvas.width = canvaWidth;
 		this.canvas.height = canvaHeight;
 
 		
-		this.player = new Player(this);
+		this.player = new Player(this, roomId);
 		this.input = new InputHandler();
 		this.lastFrameTime = 0;
 		this.deltaTime = 0;
