@@ -48,6 +48,7 @@ export default {
 	mounted() {
 		const canva = document.getElementById('canvas');
 		this.game = new Game2D(canva, 800, 440);
+		this.game.addUsersAlreadyInRoom(this.roomState.roomData.users);
 		this.game.openConnection("ws://127.0.0.1:8080/" + this.roomState.roomData.connectionRoute, this.user.id);
 		this.game.start();
 	},
