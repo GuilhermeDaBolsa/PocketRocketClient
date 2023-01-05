@@ -4,7 +4,7 @@
 		<div class="col-md-4 d-flex align-items-center">
 			<img src="../assets/Images/small-red-car.gif">
 		</div>
-		<p>Made with love and stress by the Observable Universe team.</p>
+		<p>Made with love and coffee by the Observable Universe team.</p>
 	</footer>
 
 </template>
